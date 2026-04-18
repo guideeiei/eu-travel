@@ -12,6 +12,10 @@
   --teal:#00d4aa;--teal-bg:rgba(0,212,170,0.1);
   --tab-h:64px;--top-h:56px;--radius:14px;--radius-sm:10px;
 }
+html,body{
+  height:100%;
+  min-height:100vh;
+}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
 
 /* TOPBAR */
@@ -209,57 +213,7 @@ canvas{display:block;}
 .hero-countdown{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;color:var(--accent2);}
 .hero-countdown-label{font-size:11px;color:var(--text3);}
 
-//* ===== MOBILE FIXED TAB LAYOUT ===== */
-
-/* reset */
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-/* โครงหลัก */
-body {
-  display: flex;
-  flex-direction: column;
-
-  height: 100vh;
-  overflow: hidden; /* กัน scroll ซ้อน */
-}
-
-/* แถบบน */
-.topbar {
-  height: var(--top-h);
-  flex-shrink: 0;
-}
-
-/* พื้นที่เลื่อน */
-.scroll-wrap {
-  flex: 1;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  min-height: 0;
-
-  padding-bottom: calc(var(--tab-h) + 12px);
-
-  -webkit-overflow-scrolling: touch;
-}
-
-/* tab ล่าง — นิ่ง */
-.tabbar {
-  height: var(--tab-h);
-
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
-  background: var(--bg2);
-  border-top: 1px solid var(--border);
-
-  z-index: 1000;
-}
+@media(min-width:600px){
   .dest-full-grid{grid-template-columns:repeat(3,1fr);}
   .wish-grid{grid-template-columns:repeat(3,1fr);}
   .stats-grid{grid-template-columns:repeat(4,1fr);}
