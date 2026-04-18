@@ -97,7 +97,7 @@ const COUNTRIES = [
       },
           {
         name: 'Lake Como',
-        image: 'images/Lake Como.jpg',
+        image: 'images/Lake Como.jpe',
         place:  'Lombardy'
       },
 
