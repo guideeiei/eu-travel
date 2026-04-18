@@ -199,7 +199,18 @@ function toast(msg){
   t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),2200);
 }
-
+// expose for HTML onclick
+window.showTab = showTab;
+window.toggleWish = toggleWish;
+window.setDestFilter = setDestFilter;
+window.clearSel = clearSel;
+window.saveWishlist = saveWishlist;
+window.openModal = openModal;
+window.closeModal = closeModal;
+window.saveTrip = saveTrip;
+window.deleteTrip = deleteTrip;
+window.togglePack = togglePack;
+window.resetPack = resetPack;
 // INIT
 renderHome();
 renderDestGrid();
