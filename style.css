@@ -221,6 +221,30 @@ canvas{display:block;}
 .hero-countdown-label{font-size:11px;color:var(--text3);}
 
 @media(min-width:600px){
+   .tab-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .tab-label {
+    font-size: 12px;
+  }
+
+  .topbar-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .chip {
+    font-size: 13px;
+    padding: 7px 14px;
+  }
+
+  .stat-value {
+    font-size: 32px;
+  }
+
+}
   .dest-full-grid{grid-template-columns:repeat(3,1fr);}
   .wish-grid{grid-template-columns:repeat(3,1fr);}
   .stats-grid{grid-template-columns:repeat(4,1fr);}
