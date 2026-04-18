@@ -338,23 +338,27 @@ html, body {
   margin-top: 8px;
 
 }
+.place-info {
 
-.place-price {
+  padding: 10px 12px;
 
-  font-size: 13px;
+}
 
-  color: var(--accent2);
+.place-name {
+
+  font-weight: 600;
+
+  font-size: 14px;
+
+}
+
+.place-city {
+
+  font-size: 12px;
+
+  color: var(--text3);
 
   margin-top: 2px;
 
 }
 
-.place-desc {
-
-  font-size: 12px;
-
-  color: var(--text2);
-
-  margin-top: 4px;
-
-}
