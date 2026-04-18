@@ -209,12 +209,7 @@ canvas{display:block;}
 .hero-countdown{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;color:var(--accent2);}
 .hero-countdown-label{font-size:11px;color:var(--text3);}
 
-/* ===== BASIC STABLE LAYOUT (Mobile + iPad) ===== */
-
-:root{
-  --top-h: 56px;
-  --tab-h: 64px;
-}
+//* ===== MOBILE FIXED TAB LAYOUT ===== */
 
 /* reset */
 html, body {
@@ -227,22 +222,23 @@ body {
   display: flex;
   flex-direction: column;
 
-  width: 100%;
   height: 100vh;
-
-  overflow: hidden;   /* กัน scroll ซ้อน */
+  overflow: hidden; /* กัน scroll ซ้อน */
 }
 
 /* แถบบน */
-.topbar{
+.topbar {
   height: var(--top-h);
   flex-shrink: 0;
 }
 
-/* พื้นที่เนื้อหา */
-.scroll-wrap{
+/* พื้นที่เลื่อน */
+.scroll-wrap {
   flex: 1;
+
   overflow-y: auto;
+  overflow-x: hidden;
+
   min-height: 0;
 
   padding-bottom: calc(var(--tab-h) + 12px);
@@ -250,8 +246,8 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* แถบล่าง */
-.tabbar{
+/* tab ล่าง — นิ่ง */
+.tabbar {
   height: var(--tab-h);
 
   position: fixed;
@@ -264,25 +260,6 @@ body {
 
   z-index: 1000;
 }
-
-/* ===== iPad / Tablet ===== */
-
-@media (min-width: 768px){
-
-  .dest-full-grid{
-    grid-template-columns: repeat(3,1fr);
-  }
-
-  .wish-grid{
-    grid-template-columns: repeat(3,1fr);
-  }
-
-  .stats-grid{
-    grid-template-columns: repeat(4,1fr);
-  }
-
-}
-
   .dest-full-grid{grid-template-columns:repeat(3,1fr);}
   .wish-grid{grid-template-columns:repeat(3,1fr);}
   .stats-grid{grid-template-columns:repeat(4,1fr);}
