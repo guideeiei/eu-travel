@@ -227,17 +227,10 @@ body {
   display: flex;
   flex-direction: column;
 
-  max-width: 420px;   /* มือถือ */
-  margin: 0 auto;
+  width: 100%;
+  height: 100vh;
 
   overflow: hidden;   /* กัน scroll ซ้อน */
-}
-
-/* iPad */
-@media (min-width: 768px){
-  body{
-    max-width: 600px;
-  }
 }
 
 /* แถบบน */
@@ -252,7 +245,8 @@ body {
   overflow-y: auto;
   min-height: 0;
 
-  padding-bottom: var(--tab-h);
+  padding-bottom: calc(var(--tab-h) + 12px);
+
   -webkit-overflow-scrolling: touch;
 }
 
@@ -265,11 +259,28 @@ body {
   left: 0;
   right: 0;
 
-  max-width: inherit;
-  margin: 0 auto;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
 
-  background: #111;
   z-index: 1000;
+}
+
+/* ===== iPad / Tablet ===== */
+
+@media (min-width: 768px){
+
+  .dest-full-grid{
+    grid-template-columns: repeat(3,1fr);
+  }
+
+  .wish-grid{
+    grid-template-columns: repeat(3,1fr);
+  }
+
+  .stats-grid{
+    grid-template-columns: repeat(4,1fr);
+  }
+
 }
 
   .dest-full-grid{grid-template-columns:repeat(3,1fr);}
