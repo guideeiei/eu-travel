@@ -1,15 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-<title>EuroTrip — Guide & GF</title>
-
-<link rel="stylesheet" href="style.css"/>
-
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-</head>
-<body>
 
 <!-- TOP BAR -->
 <div class="topbar">
@@ -17,106 +6,42 @@
     <div class="topbar-title">✈ EuroTrip</div>
     <div class="topbar-sub">Guide & Girlfriend · UK Base</div>
   </div>
-  <button class="topbar-btn" onclick="openModal()">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-      <path d="M8 3v10M3 8h10"/>
-    </svg>
-  </button>
+  <button class="topbar-btn" onclick="openModal()">+</button>
 </div>
 
-<!-- SCROLL AREA -->
 <div class="scroll-wrap">
-
-  <!-- HOME -->
   <div class="panel active" id="panel-home">
     <div id="hero-wrap"></div>
-
     <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-label">Trips</div>
-        <div class="stat-value" id="s-trips">0</div>
-        <div class="stat-sub">planned</div>
-      </div>
-
-      <div class="stat-card">
-        <div class="stat-label">Wishlist</div>
-        <div class="stat-value" id="s-wish">0</div>
-        <div class="stat-sub">saved</div>
-      </div>
-
-      <div class="stat-card">
-        <div class="stat-label">Countries</div>
-        <div class="stat-value" id="s-countries">0</div>
-        <div class="stat-sub">to visit</div>
-      </div>
-
-      <div class="stat-card">
-        <div class="stat-label">Budget</div>
-        <div class="stat-value" id="s-budget">£0</div>
-        <div class="stat-sub">total est.</div>
-      </div>
+      <div class="stat-card"><div class="stat-label">Trips</div><div class="stat-value" id="s-trips">0</div></div>
+      <div class="stat-card"><div class="stat-label">Wishlist</div><div class="stat-value" id="s-wish">0</div></div>
+      <div class="stat-card"><div class="stat-label">Countries</div><div class="stat-value" id="s-countries">0</div></div>
+      <div class="stat-card"><div class="stat-label">Budget</div><div class="stat-value" id="s-budget">£0</div></div>
     </div>
 
     <div class="card">
-      <div class="section-title">Budget breakdown</div>
-      <div class="chart-wrap">
-        <canvas id="budgetChart"></canvas>
-      </div>
-      <div id="chart-legend"></div>
+      <div class="section-title">Recommended from UK</div>
+      <div class="dest-scroll" id="dash-recs"></div>
     </div>
-
-    <div class="card">
-      <div class="section-header">
-        <div class="section-title">Wishlist</div>
-        <button class="btn btn-ghost btn-sm" onclick="showTab('wish')">See all</button>
-      </div>
-      <div id="dash-wish-preview"></div>
-    </div>
-
-    <div class="section-title">Recommended from UK</div>
-    <div class="dest-scroll" id="dash-recs"></div>
   </div>
 
-  <!-- DESTINATIONS -->
   <div class="panel" id="panel-dest">
-    <div class="search-bar">
-      <input type="text" placeholder="Search cities..." id="dest-search" oninput="renderDestGrid()"/>
-    </div>
-
-    <div class="chip-row">
-      <div class="chip active" data-f="all" onclick="setDestFilter(this,'all')">All</div>
-      <div class="chip" data-f="spring" onclick="setDestFilter(this,'spring')">🌸 Spring</div>
-      <div class="chip" data-f="summer" onclick="setDestFilter(this,'summer')">☀️ Summer</div>
-      <div class="chip" data-f="autumn" onclick="setDestFilter(this,'autumn')">🍂 Autumn</div>
-      <div class="chip" data-f="winter" onclick="setDestFilter(this,'winter')">❄️ Winter</div>
-    </div>
-
     <div class="dest-full-grid" id="dest-grid"></div>
   </div>
 
-  <!-- TRIPS -->
   <div class="panel" id="panel-trips">
-    <div class="section-header">
-      <div class="section-title">My Trips</div>
-      <button class="btn btn-primary btn-sm" onclick="openModal()">+ Add</button>
-    </div>
     <div id="trips-list"></div>
   </div>
 
-  <!-- WISHLIST -->
   <div class="panel" id="panel-wish">
-    <div class="section-title">Wishlist</div>
     <div id="wish-list"></div>
   </div>
 
-  <!-- PACK -->
   <div class="panel" id="panel-pack">
-    <div class="section-title">Packing checklist</div>
     <div id="pack-body"></div>
   </div>
 </div>
 
-<!-- TAB BAR -->
 <div class="tabbar">
   <div class="tab-item active" id="tab-home" onclick="showTab('home')"><span class="tab-label">Home</span></div>
   <div class="tab-item" id="tab-dest" onclick="showTab('dest')"><span class="tab-label">Explore</span></div>
@@ -125,39 +50,26 @@
   <div class="tab-item" id="tab-pack" onclick="showTab('pack')"><span class="tab-label">Pack</span></div>
 </div>
 
-<!-- TRIP MODAL -->
 <div class="modal-bg" id="modal-bg">
   <div class="modal">
-    <div class="modal-title">Plan a new trip</div>
     <input class="form-input" type="text" id="f-dest" placeholder="Destination"/>
-    <input class="form-input" type="text" id="f-flag" placeholder="Flag"/>
+    <input class="form-input" type="text" id="f-flag" placeholder="🇫🇷"/>
     <input class="form-input" type="date" id="f-from"/>
     <input class="form-input" type="date" id="f-to"/>
-    <input class="form-input" type="number" id="f-budget"/>
-    <input class="form-input" type="text" id="f-notes"/>
-
-    <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="saveTrip()">Save trip</button>
-    </div>
+    <input class="form-input" type="number" id="f-budget" placeholder="500"/>
+    <input class="form-input" type="text" id="f-notes" placeholder="Notes"/>
+    <select class="form-select" id="f-season">
+      <option value="spring">Spring</option>
+      <option value="summer">Summer</option>
+      <option value="autumn">Autumn</option>
+      <option value="winter">Winter</option>
+    </select>
+    <button onclick="saveTrip()">Save trip</button>
+    <button onclick="closeModal()">Cancel</button>
   </div>
 </div>
 
-<!-- PLACES MODAL -->
-<div class="modal-bg" id="places-modal">
-  <div class="modal">
-    <div class="modal-title" id="places-title">Places</div>
-    <div id="places-body"></div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closePlacesModal()">Close</button>
-    </div>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div class="toast" id="toast">
-  <span id="toast-msg">Saved!</span>
-</div>
+<div class="toast" id="toast"><span id="toast-msg">Saved!</span></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="script.js"></script>
