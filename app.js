@@ -384,30 +384,30 @@ function openCountry(id) {
     document.getElementById('place-list');
 
   list.innerHTML =
-    country.places.map(p => `
+  country.places.map(p => `
 
-      <div class="place-card">
+    <div class="place-card">
 
-        <img
-          src="${p.image}"
-          class="place-img"
-        >
+      <img
+        src="${p.image}"
+        class="place-img"
+      >
+
+      <div class="place-info">
 
         <div class="place-name">
           ${p.name}
         </div>
 
-        <div class="place-price">
-          €${p.price}
-        </div>
-
-        <div>
-          ${p.desc}
+        <div class="place-city">
+          ${p.place}
         </div>
 
       </div>
 
-    `).join('');
+    </div>
+
+  `).join('');
 
   document
     .getElementById('country-modal')
