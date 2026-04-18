@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>EuroTrip — Guide & GF</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>EuroTrip — Guide & GF</title>
 
-  <link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="style.css"/>
 
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
@@ -27,15 +27,34 @@
 <!-- SCROLL AREA -->
 <div class="scroll-wrap">
 
-  <!-- DASHBOARD -->
+  <!-- HOME -->
   <div class="panel active" id="panel-home">
     <div id="hero-wrap"></div>
 
     <div class="stats-grid">
-      <div class="stat-card"><div class="stat-label">Trips</div><div class="stat-value" id="s-trips">0</div></div>
-      <div class="stat-card"><div class="stat-label">Wishlist</div><div class="stat-value" id="s-wish">0</div></div>
-      <div class="stat-card"><div class="stat-label">Countries</div><div class="stat-value" id="s-countries">0</div></div>
-      <div class="stat-card"><div class="stat-label">Budget</div><div class="stat-value" id="s-budget">£0</div></div>
+      <div class="stat-card">
+        <div class="stat-label">Trips</div>
+        <div class="stat-value" id="s-trips">0</div>
+        <div class="stat-sub">planned</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Wishlist</div>
+        <div class="stat-value" id="s-wish">0</div>
+        <div class="stat-sub">saved</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Countries</div>
+        <div class="stat-value" id="s-countries">0</div>
+        <div class="stat-sub">to visit</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-label">Budget</div>
+        <div class="stat-value" id="s-budget">£0</div>
+        <div class="stat-sub">total est.</div>
+      </div>
     </div>
 
     <div class="card">
@@ -97,7 +116,7 @@
   </div>
 </div>
 
-<!-- BOTTOM TAB BAR -->
+<!-- TAB BAR -->
 <div class="tabbar">
   <div class="tab-item active" id="tab-home" onclick="showTab('home')"><span class="tab-label">Home</span></div>
   <div class="tab-item" id="tab-dest" onclick="showTab('dest')"><span class="tab-label">Explore</span></div>
@@ -142,6 +161,5 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="script.js"></script>
-
 </body>
 </html>
