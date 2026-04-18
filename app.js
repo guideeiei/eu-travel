@@ -67,7 +67,7 @@ const COUNTRIES = [
       },
          {
         name: 'Colosseum',
-        image: 'images/colosseum.jpg',
+        image: 'images/Colosseum.jpg',
         place:  'Rome'
       },
         {
