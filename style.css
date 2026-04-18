@@ -209,8 +209,7 @@ canvas{display:block;}
 .hero-countdown{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;color:var(--accent2);}
 .hero-countdown-label{font-size:11px;color:var(--text3);}
 
-@media(min-width:600px){
-/* ===== ONE FIX FOR ALL SCREENS ===== */
+/* ===== BASIC STABLE LAYOUT (Mobile + iPad) ===== */
 
 :root{
   --top-h: 56px;
@@ -223,47 +222,44 @@ html, body {
   margin: 0;
 }
 
-/* app container */
+/* โครงหลัก */
 body {
-  max-width: 420px;     /* mobile width */
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  overflow: hidden;     /* กัน scroll ซ้อน */
+
+  max-width: 420px;   /* มือถือ */
+  margin: 0 auto;
+
+  overflow: hidden;   /* กัน scroll ซ้อน */
 }
 
-/* tablet */
+/* iPad */
 @media (min-width: 768px){
   body{
     max-width: 600px;
   }
 }
 
-/* desktop */
-@media (min-width: 1024px){
-  body{
-    max-width: 720px;
-  }
-}
-
-/* top bar */
+/* แถบบน */
 .topbar{
   height: var(--top-h);
   flex-shrink: 0;
 }
 
-/* scroll area */
+/* พื้นที่เนื้อหา */
 .scroll-wrap{
   flex: 1;
   overflow-y: auto;
   min-height: 0;
+
   padding-bottom: var(--tab-h);
   -webkit-overflow-scrolling: touch;
 }
 
-/* bottom tab bar */
+/* แถบล่าง */
 .tabbar{
   height: var(--tab-h);
+
   position: fixed;
   bottom: 0;
   left: 0;
@@ -273,7 +269,7 @@ body {
   margin: 0 auto;
 
   background: #111;
-  z-index: 999;
+  z-index: 1000;
 }
 
   .dest-full-grid{grid-template-columns:repeat(3,1fr);}
