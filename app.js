@@ -1,4 +1,3 @@
-
 <script>
 const DESTS=[
   {id:'paris',flag:'🇫🇷',name:'Paris',country:'France',desc:'Cafés, art, and the Eiffel Tower at golden hour.',best:['spring','autumn'],tags:['Romantic','Art','Food'],color:'#ff6ba0'},
