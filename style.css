@@ -260,3 +260,74 @@ html, body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
+.modal {
+
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0,0,0,0.6);
+
+  display: none;
+
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+
+}
+
+.modal.open {
+
+  display: flex;
+
+}
+
+.modal-content {
+
+  background: white;
+
+  width: 90%;
+  max-width: 420px;
+
+  max-height: 80vh;
+
+  overflow-y: auto;
+
+  border-radius: 14px;
+
+  padding: 16px;
+
+}
+
+.place-card {
+
+  margin-bottom: 14px;
+
+}
+
+.place-img {
+
+  width: 100%;
+  height: 140px;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+}
+
+.place-name {
+
+  font-weight: 600;
+
+  margin-top: 6px;
+
+}
+
+.place-price {
+
+  color: #7c6fff;
+
+  font-weight: 600;
+
+}
