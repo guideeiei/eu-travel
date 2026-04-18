@@ -3,27 +3,23 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-<title>EuroTrip — Guide & Series </title>
+<title>EuroTrip — Guide & GF</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css"/>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 </head>
 
 <body>
 
-<!-- TOP BAR -->
+<!-- TOPBAR -->
 <div class="topbar">
   <div>
     <div class="topbar-title">✈ EuroTrip</div>
     <div class="topbar-sub">Guide & Girlfriend · UK Base</div>
   </div>
-  <button class="topbar-btn" onclick="openModal()">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-      <path d="M8 3v10M3 8h10"/>
-    </svg>
-  </button>
+  <button class="topbar-btn" onclick="openModal()">+</button>
 </div>
 
 <!-- SCROLL -->
@@ -43,6 +39,7 @@
     <div class="card">
       <div class="section-title">Budget breakdown</div>
       <div class="chart-wrap"><canvas id="budgetChart"></canvas></div>
+      <div id="chart-legend"></div>
     </div>
 
     <div class="card">
@@ -57,12 +54,23 @@
   <!-- DEST -->
   <div class="panel" id="panel-dest">
     <div class="search-bar">
-      <input type="text" placeholder="Search..." id="dest-search" oninput="renderDestGrid()"/>
+      <input id="dest-search" oninput="renderDestGrid()" placeholder="Search..."/>
+    </div>
+
+    <div class="chip-row">
+      <div class="chip active" onclick="setDestFilter(this,'all')">All</div>
+      <div class="chip" onclick="setDestFilter(this,'spring')">Spring</div>
+      <div class="chip" onclick="setDestFilter(this,'summer')">Summer</div>
+      <div class="chip" onclick="setDestFilter(this,'autumn')">Autumn</div>
+      <div class="chip" onclick="setDestFilter(this,'winter')">Winter</div>
     </div>
 
     <div class="dest-full-grid" id="dest-grid"></div>
 
-    <button onclick="saveWishlist()">Save wishlist</button>
+    <div style="display:flex;gap:8px;margin-top:10px;">
+      <button onclick="clearSel()">Clear</button>
+      <button onclick="saveWishlist()">Save wishlist</button>
+    </div>
   </div>
 
   <!-- TRIPS -->
@@ -82,7 +90,7 @@
 
 </div>
 
-<!-- TAB BAR -->
+<!-- TAB -->
 <div class="tabbar">
   <div onclick="showTab('home')">Home</div>
   <div onclick="showTab('dest')">Explore</div>
@@ -92,17 +100,30 @@
 </div>
 
 <!-- MODAL -->
-<div class="modal-bg" id="modal-bg">
+<div class="modal-bg" id="modal-bg" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <input id="f-dest" placeholder="Destination"/>
     <input id="f-flag" placeholder="Flag"/>
     <input id="f-from" type="date"/>
     <input id="f-to" type="date"/>
     <input id="f-budget" type="number" placeholder="Budget"/>
-    <button onclick="saveTrip()">Save</button>
+    <select id="f-season">
+      <option value="spring">Spring</option>
+      <option value="summer">Summer</option>
+      <option value="autumn">Autumn</option>
+      <option value="winter">Winter</option>
+    </select>
+
+    <input id="f-notes" placeholder="Notes"/>
+
+    <div style="display:flex;gap:8px;">
+      <button onclick="closeModal()">Cancel</button>
+      <button onclick="saveTrip()">Save</button>
+    </div>
   </div>
 </div>
 
+<!-- TOAST -->
 <div class="toast" id="toast"><span id="toast-msg"></span></div>
 
 <script src="script.js"></script>
