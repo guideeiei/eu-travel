@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>EuroTrip — Guide & GF</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+:root{
+  --bg:#0c0c12;--bg2:#13131c;--bg3:#1a1a26;--bg4:#20202e;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --text:#f0eff6;--text2:#8b8a9a;--text3:#4e4d5e;
+  --accent:#7c6fff;--accent2:#a99fff;--accent-bg:rgba(124,111,255,0.13);
+  --green:#22d47c;--green-bg:rgba(34,212,124,0.1);
+  --amber:#f5a923;--amber-bg:rgba(245,169,35,0.1);
+  --red:#ff5c5c;--red-bg:rgba(255,92,92,0.1);
+  --blue:#3b9fff;--blue-bg:rgba(59,159,255,0.1);
+  --pink:#ff6ba0;--pink-bg:rgba(255,107,160,0.1);
+  --teal:#00d4aa;--teal-bg:rgba(0,212,170,0.1);
+  --tab-h:64px;--top-h:56px;--radius:14px;--radius-sm:10px;
+}
+html,body{height:100%;overflow:hidden;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
+
+/* TOPBAR */
+.topbar{height:var(--top-h);background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-shrink:0;position:relative;z-index:10;}
+.topbar-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;letter-spacing:-0.02em;}
+.topbar-sub{font-size:10px;color:var(--text3);margin-top:1px;}
+.topbar-btn{width:34px;height:34px;border-radius:var(--radius-sm);background:var(--bg3);border:1px solid var(--border);color:var(--text2);display:flex;align-items:center;justify-content:center;cursor:pointer;}
+
+/* SCROLL CONTAINER */
+.scroll-wrap{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--tab-h) + 16px);}
+::-webkit-scrollbar{width:0;}
+
+/* BOTTOM TAB BAR */
+.tabbar{height:var(--tab-h);background:var(--bg2);border-top:1px solid var(--border);display:flex;align-items:stretch;flex-shrink:0;position:relative;z-index:20;padding-bottom:env(safe-area-inset-bottom);}
+.tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;transition:all 0.15s;padding:8px 0;}
+.tab-item .tab-icon{width:22px;height:22px;transition:all 0.15s;}
+.tab-item .tab-label{font-size:10px;color:var(--text3);transition:all 0.15s;font-weight:500;}
+.tab-item.active .tab-label{color:var(--accent2);}
+.tab-item.active .tab-icon path,.tab-item.active .tab-icon circle,.tab-item.active .tab-icon rect,.tab-item.active .tab-icon polyline{stroke:var(--accent2);}
+.tab-badge{position:absolute;top:6px;right:calc(50% - 18px);background:var(--accent);color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid var(--bg2);}
+
+/* PANELS */
+.panel{display:none;padding:16px;}
+.panel.active{display:block;animation:fadeUp 0.2s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* CARDS */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;}
+.card+.card{margin-top:10px;}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;}
+.stat-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;}
+.stat-value{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;color:var(--text);line-height:1;}
+.stat-sub{font-size:10px;color:var(--text3);margin-top:3px;}
+
+/* SECTION */
+.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.section-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;letter-spacing:-0.01em;}
+.section-sub{font-size:11px;color:var(--text3);margin-top:1px;}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:var(--radius-sm);font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all 0.15s;}
+.btn-primary{background:var(--accent);color:#fff;}
+.btn-primary:active{opacity:0.8;transform:scale(0.97);}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border2);}
+.btn-ghost:active{background:var(--bg3);}
+.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid rgba(255,92,92,0.2);}
+.btn-sm{padding:5px 10px;font-size:11px;}
+.btn-full{width:100%;justify-content:center;}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:999px;font-size:10px;font-weight:500;}
+.badge-accent{background:var(--accent-bg);color:var(--accent2);}
+.badge-green{background:var(--green-bg);color:var(--green);}
+.badge-amber{background:var(--amber-bg);color:var(--amber);}
+.badge-blue{background:var(--blue-bg);color:var(--blue);}
+.badge-pink{background:var(--pink-bg);color:var(--pink);}
+.badge-teal{background:var(--teal-bg);color:var(--teal);}
+.badge-red{background:var(--red-bg);color:var(--red);}
+
+/* DESTINATION CARDS */
+.dest-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none;}
+.dest-scroll::-webkit-scrollbar{display:none;}
+.dest-mini{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;flex-shrink:0;width:150px;cursor:pointer;transition:all 0.15s;position:relative;overflow:hidden;}
+.dest-mini.selected{border-color:var(--accent);background:var(--accent-bg);}
+.dest-mini:active{transform:scale(0.96);}
+.dest-mini-flag{font-size:24px;margin-bottom:6px;}
+.dest-mini-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:2px;}
+.dest-mini-country{font-size:10px;color:var(--text3);margin-bottom:8px;}
+.dest-mini-tags{display:flex;flex-wrap:wrap;gap:3px;}
+.dest-mini-tag{font-size:9px;padding:1px 5px;border-radius:999px;background:var(--bg3);color:var(--text3);border:1px solid var(--border);}
+.dest-mini-check{position:absolute;top:8px;right:8px;width:18px;height:18px;border-radius:50%;background:var(--accent);display:none;align-items:center;justify-content:center;}
+.dest-mini.selected .dest-mini-check{display:flex;}
+.mini-check-svg{width:9px;height:9px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+
+/* FULL DEST GRID */
+.dest-full-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.dest-card-full{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;cursor:pointer;transition:all 0.15s;position:relative;overflow:hidden;}
+.dest-card-full.selected{border-color:var(--accent);background:var(--accent-bg);}
+.dest-card-full:active{transform:scale(0.97);}
+.dcf-flag{font-size:26px;margin-bottom:6px;}
+.dcf-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:1px;}
+.dcf-country{font-size:10px;color:var(--text3);margin-bottom:6px;}
+.dcf-desc{font-size:11px;color:var(--text2);line-height:1.4;margin-bottom:8px;}
+.dcf-tags{display:flex;flex-wrap:wrap;gap:3px;}
+.dcf-tag{font-size:9px;padding:2px 6px;border-radius:999px;background:var(--bg3);color:var(--text3);border:1px solid var(--border);}
+.dcf-check{position:absolute;top:10px;right:10px;width:20px;height:20px;border-radius:50%;background:var(--accent);display:none;align-items:center;justify-content:center;}
+.dest-card-full.selected .dcf-check{display:flex;}
+.dcf-bar{position:absolute;bottom:0;left:0;right:0;height:3px;}
+
+/* FILTER CHIPS */
+.chip-row{display:flex;gap:6px;overflow-x:auto;margin-bottom:14px;padding-bottom:2px;scrollbar-width:none;}
+.chip-row::-webkit-scrollbar{display:none;}
+.chip{padding:5px 12px;border-radius:999px;font-size:11px;cursor:pointer;border:1px solid var(--border);background:var(--bg2);color:var(--text2);white-space:nowrap;transition:all 0.15s;flex-shrink:0;}
+.chip.active{background:var(--accent-bg);border-color:var(--accent);color:var(--accent2);}
+.search-bar{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:999px;padding:8px 14px;margin-bottom:12px;}
+.search-bar input{background:none;border:none;outline:none;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;flex:1;}
+.search-bar input::placeholder{color:var(--text3);}
+.search-icon{color:var(--text3);flex-shrink:0;}
+
+/* TRIP LIST */
+.trip-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px;transition:all 0.15s;}
+.trip-card:active{transform:scale(0.98);}
+.trip-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px;}
+.trip-flag-name{display:flex;align-items:center;gap:10px;}
+.trip-flag{font-size:24px;}
+.trip-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
+.trip-dates{font-size:11px;color:var(--text3);margin-top:2px;}
+.trip-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.trip-notes{font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:10px;padding:8px 10px;background:var(--bg3);border-radius:var(--radius-sm);}
+.trip-actions{display:flex;gap:6px;}
+.budget-bar-wrap{margin-top:8px;}
+.budget-bar-label{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:4px;}
+.budget-bar{height:3px;background:var(--bg4);border-radius:2px;overflow:hidden;}
+.budget-bar-fill{height:100%;background:var(--accent);border-radius:2px;}
+
+/* PACKING CHECKLIST */
+.checklist-section{margin-bottom:16px;}
+.checklist-title{font-size:12px;font-weight:500;color:var(--text2);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.check-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg3);border-radius:var(--radius-sm);margin-bottom:6px;cursor:pointer;transition:all 0.12s;}
+.check-item:active{transform:scale(0.98);}
+.check-box{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;}
+.check-box.checked{background:var(--accent);border-color:var(--accent);}
+.check-text{font-size:13px;color:var(--text);transition:all 0.15s;flex:1;}
+.check-text.done{color:var(--text3);text-decoration:line-through;}
+.check-progress{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;margin-bottom:14px;}
+.check-progress-fill{height:100%;background:var(--green);border-radius:2px;transition:width 0.3s;}
+
+/* TIMELINE */
+.tl-list{position:relative;padding-left:24px;}
+.tl-list::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:1px;background:var(--border);}
+.tl-item{position:relative;margin-bottom:14px;}
+.tl-item::before{content:'';position:absolute;left:-20px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);z-index:1;}
+.tl-item.done::before{background:var(--green);}
+.tl-item.upcoming::before{background:var(--text3);}
+.tl-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;}
+.tl-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+.tl-name{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
+.tl-date{font-size:10px;color:var(--text3);margin-top:2px;}
+.tl-note{font-size:11px;color:var(--text2);margin-top:6px;line-height:1.4;}
+
+/* BUDGET CHART */
+.chart-wrap{position:relative;width:100%;height:180px;margin-bottom:8px;}
+canvas{display:block;}
+
+/* WISHLIST */
+.wish-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.wish-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:12px;display:flex;align-items:center;gap:8px;}
+.wish-flag{font-size:18px;}
+.wish-info{flex:1;min-width:0;}
+.wish-name{font-size:12px;font-weight:500;}
+.wish-country{font-size:10px;color:var(--text3);}
+.wish-rm{background:none;border:none;color:var(--text3);font-size:16px;cursor:pointer;padding:2px 4px;border-radius:4px;}
+.wish-rm:active{color:var(--red);}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:100;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);}
+.modal-bg.open{display:flex;}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:20px 20px 0 0;padding:20px 20px calc(20px + env(safe-area-inset-bottom));width:100%;max-height:90vh;overflow-y:auto;}
+.modal-handle{width:36px;height:4px;border-radius:2px;background:var(--border2);margin:0 auto 16px;}
+.modal-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:4px;}
+.modal-sub{font-size:12px;color:var(--text2);margin-bottom:18px;}
+.form-group{margin-bottom:14px;}
+.form-label{font-size:11px;color:var(--text2);font-weight:500;margin-bottom:5px;display:block;}
+.form-input,.form-select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;-webkit-appearance:none;}
+.form-input:focus,.form-select:focus{border-color:var(--accent);}
+.form-input::placeholder{color:var(--text3);}
+.form-select option{background:var(--bg3);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.modal-actions{display:flex;gap:8px;margin-top:16px;}
+.modal-actions .btn{flex:1;justify-content:center;}
+
+/* TOAST */
+.toast{position:fixed;bottom:calc(var(--tab-h) + 16px);left:50%;transform:translateX(-50%) translateY(20px);background:var(--bg3);border:1px solid var(--border2);border-radius:999px;padding:10px 18px;font-size:13px;color:var(--text);z-index:999;opacity:0;transition:all 0.25s;white-space:nowrap;display:flex;align-items:center;gap:6px;box-shadow:0 8px 24px rgba(0,0,0,0.4);}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;}
+
+/* EMPTY */
+.empty{text-align:center;padding:40px 16px;}
+.empty-icon{font-size:36px;margin-bottom:10px;}
+.empty-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;}
+.empty-sub{font-size:12px;color:var(--text2);margin-bottom:16px;line-height:1.5;}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:16px 0;}
+
+/* NEXT TRIP HERO */
+.hero-card{background:linear-gradient(135deg,#1a1535 0%,#13131c 100%);border:1px solid var(--accent-bg);border-radius:var(--radius);padding:18px;margin-bottom:16px;position:relative;overflow:hidden;}
+.hero-card::after{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;background:var(--accent);opacity:0.08;border-radius:50%;}
+.hero-label{font-size:10px;color:var(--accent2);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;}
+.hero-dest{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:4px;}
+.hero-dates{font-size:12px;color:var(--text2);margin-bottom:10px;}
+.hero-countdown{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;color:var(--accent2);}
+.hero-countdown-label{font-size:11px;color:var(--text3);}
+
+@media(min-width:600px){
+  .dest-full-grid{grid-template-columns:repeat(3,1fr);}
+  .wish-grid{grid-template-columns:repeat(3,1fr);}
+  .stats-grid{grid-template-columns:repeat(4,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div>
+    <div class="topbar-title">✈ EuroTrip</div>
+    <div class="topbar-sub">Guide & Girlfriend · UK Base</div>
+  </div>
+  <button class="topbar-btn" onclick="openModal()">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+  </button>
+</div>
+
+<!-- SCROLL AREA -->
+<div class="scroll-wrap">
+
+  <!-- DASHBOARD -->
+  <div class="panel active" id="panel-home">
+    <div id="hero-wrap"></div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">Trips</div><div class="stat-value" id="s-trips">0</div><div class="stat-sub">planned</div></div>
+      <div class="stat-card"><div class="stat-label">Wishlist</div><div class="stat-value" id="s-wish">0</div><div class="stat-sub">saved</div></div>
+      <div class="stat-card"><div class="stat-label">Countries</div><div class="stat-value" id="s-countries">0</div><div class="stat-sub">to visit</div></div>
+      <div class="stat-card"><div class="stat-label">Budget</div><div class="stat-value" id="s-budget">£0</div><div class="stat-sub">total est.</div></div>
+    </div>
+
+    <!-- Budget chart -->
+    <div class="card" style="margin-bottom:10px;">
+      <div class="section-header"><div class="section-title">Budget breakdown</div></div>
+      <div class="chart-wrap"><canvas id="budgetChart" role="img" aria-label="Budget breakdown by trip"></canvas></div>
+      <div id="chart-legend" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;"></div>
+    </div>
+
+    <!-- Wishlist preview -->
+    <div class="card" style="margin-bottom:10px;">
+      <div class="section-header">
+        <div><div class="section-title">Wishlist</div></div>
+        <button class="btn btn-ghost btn-sm" onclick="showTab('wish')">See all</button>
+      </div>
+      <div id="dash-wish-preview"><div style="font-size:12px;color:var(--text2);">No destinations saved yet.</div></div>
+    </div>
+
+    <!-- Recommended -->
+    <div class="section-header" style="margin-bottom:10px;"><div class="section-title">Recommended from UK</div></div>
+    <div class="dest-scroll" id="dash-recs"></div>
+    <div style="height:8px;"></div>
+  </div>
+
+  <!-- DESTINATIONS -->
+  <div class="panel" id="panel-dest">
+    <div class="search-bar">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="4"/><path d="M10 10l2.5 2.5"/></svg>
+      <input type="text" placeholder="Search cities, countries..." id="dest-search" oninput="renderDestGrid()"/>
+    </div>
+    <div class="chip-row">
+      <div class="chip active" data-f="all" onclick="setDestFilter(this,'all')">All</div>
+      <div class="chip" data-f="spring" onclick="setDestFilter(this,'spring')">🌸 Spring</div>
+      <div class="chip" data-f="summer" onclick="setDestFilter(this,'summer')">☀️ Summer</div>
+      <div class="chip" data-f="autumn" onclick="setDestFilter(this,'autumn')">🍂 Autumn</div>
+      <div class="chip" data-f="winter" onclick="setDestFilter(this,'winter')">❄️ Winter</div>
+    </div>
+    <div class="dest-full-grid" id="dest-grid"></div>
+    <div style="display:flex;gap:8px;margin-top:14px;">
+      <button class="btn btn-ghost btn-sm" onclick="clearSel()">Clear</button>
+      <button class="btn btn-primary btn-sm" style="flex:1;justify-content:center;" onclick="saveWishlist()">Save to wishlist</button>
+    </div>
+  </div>
+
+  <!-- TRIPS -->
+  <div class="panel" id="panel-trips">
+    <div class="section-header" style="margin-bottom:14px;">
+      <div><div class="section-title">My Trips</div><div class="section-sub" id="trips-label">0 trips planned</div></div>
+      <button class="btn btn-primary btn-sm" onclick="openModal()">+ Add</button>
+    </div>
+    <div id="trips-list"></div>
+  </div>
+
+  <!-- WISHLIST -->
+  <div class="panel" id="panel-wish">
+    <div class="section-header" style="margin-bottom:14px;">
+      <div><div class="section-title">Wishlist</div><div class="section-sub">Places to visit together</div></div>
+      <button class="btn btn-ghost btn-sm" onclick="showTab('dest')">+ Add</button>
+    </div>
+    <div id="wish-list"></div>
+  </div>
+
+  <!-- PACKING -->
+  <div class="panel" id="panel-pack">
+    <div class="section-header" style="margin-bottom:6px;">
+      <div><div class="section-title">Packing checklist</div></div>
+      <div id="pack-progress-text" style="font-size:11px;color:var(--text3);">0 / 0 packed</div>
+    </div>
+    <div class="check-progress"><div class="check-progress-fill" id="pack-bar" style="width:0%"></div></div>
+    <div id="pack-body"></div>
+    <button class="btn btn-ghost btn-sm" style="margin-top:6px;" onclick="resetPack()">Reset all</button>
+  </div>
+
+</div>
+
+<!-- BOTTOM TAB BAR -->
+<div class="tabbar">
+  <div class="tab-item active" id="tab-home" onclick="showTab('home')">
+    <svg class="tab-icon" viewBox="0 0 22 22" fill="none" stroke="var(--text3)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L11 3l8 6.5V19a1 1 0 01-1 1H4a1 1 0 01-1-1z"/><path d="M8 20v-7h6v7"/></svg>
+    <span class="tab-label">Home</span>
+  </div>
+  <div class="tab-item" id="tab-dest" onclick="showTab('dest')" style="position:relative;">
+    <svg class="tab-icon" viewBox="0 0 22 22" fill="none" stroke="var(--text3)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="9" r="3"/><path d="M11 2C7.13 2 4 5.13 4 9c0 5.25 7 11 7 11s7-5.75 7-11c0-3.87-3.13-7-7-7z"/></svg>
+    <span class="tab-label">Explore</span>
+    <div class="tab-badge" id="badge-dest" style="display:none;">0</div>
+  </div>
+  <div class="tab-item" id="tab-trips" onclick="showTab('trips')" style="position:relative;">
+    <svg class="tab-icon" viewBox="0 0 22 22" fill="none" stroke="var(--text3)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="16" height="16" rx="2"/><path d="M16 2v4M8 2v4M3 10h16"/></svg>
+    <span class="tab-label">Trips</span>
+    <div class="tab-badge" id="badge-trips" style="display:none;">0</div>
+  </div>
+  <div class="tab-item" id="tab-wish" onclick="showTab('wish')" style="position:relative;">
+    <svg class="tab-icon" viewBox="0 0 22 22" fill="none" stroke="var(--text3)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 19S3 13 3 7.5A4.5 4.5 0 0111 4.1 4.5 4.5 0 0119 7.5C19 13 11 19 11 19z"/></svg>
+    <span class="tab-label">Wishlist</span>
+    <div class="tab-badge" id="badge-wish" style="display:none;">0</div>
+  </div>
+  <div class="tab-item" id="tab-pack" onclick="showTab('pack')">
+    <svg class="tab-icon" viewBox="0 0 22 22" fill="none" stroke="var(--text3)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="16" height="13" rx="2"/><path d="M8 7V5a3 3 0 016 0v2"/><path d="M9 12l2 2 4-4"/></svg>
+    <span class="tab-label">Pack</span>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Plan a new trip</div>
+    <div class="modal-sub">Add your next European adventure</div>
+    <div class="form-group">
+      <label class="form-label">Destination</label>
+      <input class="form-input" type="text" id="f-dest" placeholder="e.g. Paris, France"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Flag emoji</label>
+      <input class="form-input" type="text" id="f-flag" placeholder="🇫🇷" maxlength="4"/>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">From</label>
+        <input class="form-input" type="date" id="f-from"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">To</label>
+        <input class="form-input" type="date" id="f-to"/>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Budget (£)</label>
+        <input class="form-input" type="number" id="f-budget" placeholder="500" min="0"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Season</label>
+        <select class="form-select" id="f-season">
+          <option value="spring">🌸 Spring</option>
+          <option value="summer" selected>☀️ Summer</option>
+          <option value="autumn">🍂 Autumn</option>
+          <option value="winter">❄️ Winter</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Notes</label>
+      <input class="form-input" type="text" id="f-notes" placeholder="e.g. Eurostar, book 2 months ahead"/>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveTrip()">Save trip</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><div class="toast-dot"></div><span id="toast-msg">Saved!</span></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const DESTS=[
+  {id:'paris',flag:'🇫🇷',name:'Paris',country:'France',desc:'Cafés, art, and the Eiffel Tower at golden hour.',best:['spring','autumn'],tags:['Romantic','Art','Food'],color:'#ff6ba0'},
+  {id:'rome',flag:'🇮🇹',name:'Rome',country:'Italy',desc:'Ancient ruins, gelato, and incredible pasta.',best:['spring','autumn'],tags:['History','Food','Architecture'],color:'#f5a923'},
+  {id:'florence',flag:'🇮🇹',name:'Florence',country:'Italy',desc:'Renaissance art and Tuscan wine country.',best:['spring','autumn'],tags:['Art','Culture','Wine'],color:'#ff6b33'},
+  {id:'venice',flag:'🇮🇹',name:'Venice',country:'Italy',desc:'Gondola rides through winding canals.',best:['spring','winter'],tags:['Romantic','Unique'],color:'#3b9fff'},
+  {id:'zurich',flag:'🇨🇭',name:'Zürich',country:'Switzerland',desc:'Alpine lakes framed by snowy mountains.',best:['summer','winter'],tags:['Luxury','Scenic'],color:'#a99fff'},
+  {id:'interlaken',flag:'🇨🇭',name:'Interlaken',country:'Switzerland',desc:'Paragliding, Jungfrau, and turquoise lakes.',best:['summer','winter'],tags:['Adventure','Nature'],color:'#00d4aa'},
+  {id:'oslo',flag:'🇳🇴',name:'Oslo',country:'Norway',desc:'Fjords and Northern Lights in winter.',best:['winter','summer'],tags:['Aurora','Fjords'],color:'#3b9fff'},
+  {id:'stockholm',flag:'🇸🇪',name:'Stockholm',country:'Sweden',desc:'Colorful old town and archipelago sailing.',best:['summer','spring'],tags:['Design','Charming'],color:'#ffd700'},
+  {id:'copenhagen',flag:'🇩🇰',name:'Copenhagen',country:'Denmark',desc:'Hygge culture and a top food scene.',best:['summer','spring'],tags:['Food','Cozy'],color:'#ff6ba0'},
+  {id:'amsterdam',flag:'🇳🇱',name:'Amsterdam',country:'Netherlands',desc:'Tulip fields, canals, and world-class art.',best:['spring','summer'],tags:['Canals','Art'],color:'#ff6b33'},
+  {id:'barcelona',flag:'🇪🇸',name:'Barcelona',country:'Spain',desc:'Gaudí, beaches, tapas, and nightlife.',best:['spring','autumn'],tags:['Architecture','Beach'],color:'#f5a923'},
+  {id:'prague',flag:'🇨🇿',name:'Prague',country:'Czech Republic',desc:'Fairy-tale castle skyline on a budget.',best:['spring','autumn'],tags:['Historic','Affordable'],color:'#9b8fff'},
+];
+
+const PACK_ITEMS={
+  'Documents & Money':['Passport','Visa / travel documents','Travel insurance','Credit & debit cards','Emergency cash (GBP + EUR)','Printed hotel bookings'],
+  'Clothes':['T-shirts / tops','Trousers / jeans','Jacket or coat','Underwear & socks','Comfortable walking shoes','One smart outfit'],
+  'Toiletries':['Toothbrush & toothpaste','Shampoo & conditioner','Deodorant','Sunscreen SPF50','Lip balm','Skincare essentials'],
+  'Tech & Gadgets':['Phone + charger','Power bank','Universal adapter (EU plug)','Earphones','Camera','Download offline maps'],
+  'Health & Safety':['Paracetamol / ibuprofen','Allergy medication','Plasters / first aid','Hand sanitiser','Face masks','Prescription meds'],
+  'Couple Essentials':['Matching outfit (optional 😄)','Neck pillow for trains','Snacks for the journey','Journal / travel diary','Couple selfie poses list 📸'],
+};
+
+let wishlist=new Set(['paris','interlaken','oslo']);
+let trips=[];
+let packState={};
+let destFilter='all';
+let budgetChart=null;
+
+// Init pack state
+Object.entries(PACK_ITEMS).forEach(([cat,items])=>items.forEach(item=>packState[item]=false));
+
+// TABS
+const TABS=['home','dest','trips','wish','pack'];
+function showTab(name){
+  TABS.forEach(t=>{
+    document.getElementById('panel-'+t).classList.toggle('active',t===name);
+    const el=document.getElementById('tab-'+t);
+    el.classList.toggle('active',t===name);
+    const icon=el.querySelector('.tab-icon');
+    const strokeColor=t===name?'var(--accent2)':'var(--text3)';
+    icon.querySelectorAll('path,circle,rect,polyline').forEach(p=>p.setAttribute('stroke',strokeColor));
+  });
+  if(name==='home')renderHome();
+  if(name==='dest')renderDestGrid();
+  if(name==='trips')renderTrips();
+  if(name==='wish')renderWishlist();
+  if(name==='pack')renderPack();
+}
+
+// DESTINATIONS
+function renderDestGrid(){
+  const q=(document.getElementById('dest-search')?.value||'').toLowerCase();
+  const grid=document.getElementById('dest-grid');
+  const filtered=DESTS.filter(d=>{
+    const mf=destFilter==='all'||d.best.includes(destFilter);
+    const ms=!q||d.name.toLowerCase().includes(q)||d.country.toLowerCase().includes(q);
+    return mf&&ms;
+  });
+  grid.innerHTML=filtered.map(d=>`
+    <div class="dest-card-full ${wishlist.has(d.id)?'selected':''}" onclick="toggleWish('${d.id}')">
+      <div class="dcf-check"><svg class="mini-check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+      <div class="dcf-flag">${d.flag}</div>
+      <div class="dcf-name">${d.name}</div>
+      <div class="dcf-country">${d.country}</div>
+      <div class="dcf-desc">${d.desc}</div>
+      <div class="dcf-tags">${d.best.map(s=>`<span class="dcf-tag">${s.charAt(0).toUpperCase()+s.slice(1)}</span>`).join('')}${d.tags.map(t=>`<span class="dcf-tag">${t}</span>`).join('')}</div>
+      <div class="dcf-bar" style="background:${d.color}33;"></div>
+    </div>`).join('');
+}
+
+function toggleWish(id){
+  if(wishlist.has(id))wishlist.delete(id);else wishlist.add(id);
+  renderDestGrid();
+  updateBadges();
+}
+function setDestFilter(el,f){
+  destFilter=f;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c.dataset.f===f));
+  renderDestGrid();
+}
+function clearSel(){wishlist.clear();renderDestGrid();updateBadges();toast('Cleared');}
+function saveWishlist(){updateBadges();renderHome();toast(wishlist.size+' destinations saved');}
+
+// WISHLIST
+function renderWishlist(){
+  const wrap=document.getElementById('wish-list');
+  const items=[...wishlist].map(id=>DESTS.find(d=>d.id===id)).filter(Boolean);
+  if(!items.length){wrap.innerHTML=`<div class="empty"><div class="empty-icon">💜</div><div class="empty-title">Nothing saved yet</div><div class="empty-sub">Go to Explore and tap destinations to save them</div><button class="btn btn-primary" onclick="showTab('dest')">Browse destinations</button></div>`;return;}
+  wrap.innerHTML=`<div class="wish-grid">${items.map(d=>`<div class="wish-card"><div class="wish-flag">${d.flag}</div><div class="wish-info"><div class="wish-name">${d.name}</div><div class="wish-country">${d.country}</div></div><button class="wish-rm" onclick="wishlist.delete('${d.id}');renderWishlist();updateBadges();">×</button></div>`).join('')}</div>`;
+}
+
+// TRIPS
+function openModal(){document.getElementById('modal-bg').classList.add('open');}
+function closeModal(){document.getElementById('modal-bg').classList.remove('open');}
+document.getElementById('modal-bg').addEventListener('click',e=>{if(e.target===document.getElementById('modal-bg'))closeModal();});
+
+function saveTrip(){
+  const dest=document.getElementById('f-dest').value.trim();
+  const from=document.getElementById('f-from').value;
+  const to=document.getElementById('f-to').value;
+  if(!dest||!from||!to){toast('Fill destination & dates');return;}
+  trips.push({id:Date.now(),dest,flag:document.getElementById('f-flag').value||'🌍',from,to,budget:Number(document.getElementById('f-budget').value)||0,season:document.getElementById('f-season').value,notes:document.getElementById('f-notes').value.trim()});
+  closeModal();
+  ['f-dest','f-flag','f-from','f-to','f-budget','f-notes'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f-season').value='summer';
+  renderTrips();renderHome();updateBadges();toast('Trip saved! ✈️');
+}
+
+function deleteTrip(id){trips=trips.filter(t=>t.id!==id);renderTrips();renderHome();updateBadges();toast('Removed');}
+
+const sFmt=d=>{if(!d)return'—';const[y,m,day]=d.split('-');const mn=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return`${mn[+m-1]} ${+day}`;};
+const sBadge={spring:'teal',summer:'amber',autumn:'pink',winter:'blue'};
+
+function renderTrips(){
+  const list=document.getElementById('trips-list');
+  document.getElementById('trips-label').textContent=`${trips.length} trip${trips.length!==1?'s':''} planned`;
+  if(!trips.length){list.innerHTML=`<div class="empty"><div class="empty-icon">✈️</div><div class="empty-title">No trips yet</div><div class="empty-sub">Start planning your European adventure together</div><button class="btn btn-primary" onclick="openModal()">Plan first trip</button></div>`;return;}
+  const sorted=[...trips].sort((a,b)=>a.from.localeCompare(b.from));
+  const today=new Date().toISOString().split('T')[0];
+  const maxBudget=Math.max(...trips.map(t=>t.budget),1);
+  list.innerHTML=sorted.map(t=>{
+    const pct=Math.round((t.budget/maxBudget)*100);
+    return`<div class="trip-card">
+      <div class="trip-top">
+        <div class="trip-flag-name"><div class="trip-flag">${t.flag}</div><div><div class="trip-name">${t.dest}</div><div class="trip-dates">${sFmt(t.from)} → ${sFmt(t.to)}</div></div></div>
+        <span class="badge badge-${sBadge[t.season]}">${t.season.charAt(0).toUpperCase()+t.season.slice(1)}</span>
+      </div>
+      <div class="trip-badges">
+        ${t.budget?`<span class="badge badge-green">£${t.budget.toLocaleString()}</span>`:''}
+        ${t.to<today?'<span class="badge badge-accent">Done</span>':t.from<=today&&t.to>=today?'<span class="badge badge-amber">Ongoing</span>':''}
+      </div>
+      ${t.notes?`<div class="trip-notes">📝 ${t.notes}</div>`:''}
+      ${t.budget?`<div class="budget-bar-wrap"><div class="budget-bar-label"><span>Budget</span><span>£${t.budget.toLocaleString()}</span></div><div class="budget-bar"><div class="budget-bar-fill" style="width:${pct}%"></div></div></div>`:''}
+      <div class="trip-actions" style="margin-top:10px;">
+        <button class="btn btn-danger btn-sm" onclick="deleteTrip(${t.id})">Remove</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// PACKING
+function renderPack(){
+  const body=document.getElementById('pack-body');
+  const total=Object.keys(packState).length;
+  const done=Object.values(packState).filter(Boolean).length;
+  document.getElementById('pack-progress-text').textContent=`${done} / ${total} packed`;
+  document.getElementById('pack-bar').style.width=`${Math.round(done/total*100)}%`;
+  body.innerHTML=Object.entries(PACK_ITEMS).map(([cat,items])=>`
+    <div class="checklist-section">
+      <div class="checklist-title"><span>${getCatIcon(cat)}</span>${cat}</div>
+      ${items.map(item=>`
+        <div class="check-item" onclick="togglePack('${item.replace(/'/g,"\\'")}')">
+          <div class="check-box ${packState[item]?'checked':''}">
+            ${packState[item]?`<svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>`:''}
+          </div>
+          <span class="check-text ${packState[item]?'done':''}">${item}</span>
+        </div>`).join('')}
+    </div>`).join('');
+}
+
+function getCatIcon(cat){const m={'Documents & Money':'📄','Clothes':'👕','Toiletries':'🧴','Tech & Gadgets':'📱','Health & Safety':'💊','Couple Essentials':'💑'};return m[cat]||'📦';}
+
+function togglePack(item){
+  packState[item]=!packState[item];
+  renderPack();
+}
+function resetPack(){Object.keys(packState).forEach(k=>packState[k]=false);renderPack();toast('Checklist reset');}
+
+// HOME
+function renderHome(){
+  const today=new Date().toISOString().split('T')[0];
+  const next=[...trips].sort((a,b)=>a.from.localeCompare(b.from)).find(t=>t.to>=today);
+  const hero=document.getElementById('hero-wrap');
+  if(next){
+    const days=Math.max(0,Math.ceil((new Date(next.from)-new Date())/86400000));
+    hero.innerHTML=`<div class="hero-card"><div class="hero-label">Next trip</div><div style="font-size:28px;margin-bottom:4px;">${next.flag}</div><div class="hero-dest">${next.dest}</div><div class="hero-dates">${sFmt(next.from)} — ${sFmt(next.to)}</div><div class="hero-countdown">${days===0?'Today!':days+' days'}</div><div class="hero-countdown-label">${days===0?'Have fun!':'until departure'}</div></div>`;
+  } else {
+    hero.innerHTML=`<div class="hero-card"><div class="hero-label">No upcoming trips</div><div style="font-size:32px;margin-bottom:8px;">✈️</div><div class="hero-dest">Plan your first trip</div><div class="hero-dates">Tap + to get started</div></div>`;
+  }
+
+  document.getElementById('s-trips').textContent=trips.length;
+  document.getElementById('s-wish').textContent=wishlist.size;
+  document.getElementById('s-countries').textContent=new Set(trips.map(t=>t.dest.split(',').pop().trim())).size;
+  document.getElementById('s-budget').textContent='£'+trips.reduce((s,t)=>s+t.budget,0).toLocaleString();
+
+  // Budget chart
+  const ctx=document.getElementById('budgetChart').getContext('2d');
+  if(budgetChart){budgetChart.destroy();budgetChart=null;}
+  if(trips.length){
+    const sorted=[...trips].sort((a,b)=>a.from.localeCompare(b.from)).slice(0,6);
+    budgetChart=new Chart(ctx,{type:'bar',data:{labels:sorted.map(t=>t.flag+' '+t.dest.split(',')[0]),datasets:[{label:'Budget',data:sorted.map(t=>t.budget),backgroundColor:'rgba(124,111,255,0.6)',borderColor:'rgba(124,111,255,1)',borderWidth:1,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#4e4d5e',font:{size:10},maxRotation:20},grid:{display:false}},y:{ticks:{color:'#4e4d5e',font:{size:10},callback:v=>'£'+v},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+    document.getElementById('chart-legend').innerHTML=sorted.map(t=>t.budget?`<span style="display:flex;align-items:center;gap:4px;font-size:10px;color:#8b8a9a;">${t.flag} £${t.budget.toLocaleString()}</span>`:'').join('');
+  } else {
+    ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);
+    document.getElementById('chart-legend').innerHTML='<span style="font-size:12px;color:var(--text3);">Add trips to see budget chart</span>';
+  }
+
+  // Wishlist preview
+  const wp=document.getElementById('dash-wish-preview');
+  const items=[...wishlist].slice(0,4).map(id=>DESTS.find(d=>d.id===id)).filter(Boolean);
+  wp.innerHTML=items.length?`<div style="display:flex;flex-wrap:wrap;gap:6px;">${items.map(d=>`<div style="display:flex;align-items:center;gap:5px;background:var(--bg3);border:1px solid var(--border);border-radius:999px;padding:4px 10px;"><span style="font-size:14px;">${d.flag}</span><span style="font-size:12px;">${d.name}</span></div>`).join('')}${wishlist.size>4?`<div style="font-size:12px;color:var(--text3);display:flex;align-items:center;">+${wishlist.size-4} more</div>`:''}</div>`:'<div style="font-size:12px;color:var(--text2);">No destinations saved yet.</div>';
+
+  // Recs
+  const recs=document.getElementById('dash-recs');
+  recs.innerHTML=DESTS.filter(d=>['paris','interlaken','prague','amsterdam','oslo','barcelona'].includes(d.id)).map(d=>`
+    <div class="dest-mini ${wishlist.has(d.id)?'selected':''}" onclick="toggleWish('${d.id}');renderHome();">
+      <div class="dest-mini-check"><svg class="mini-check-svg" viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+      <div class="dest-mini-flag">${d.flag}</div>
+      <div class="dest-mini-name">${d.name}</div>
+      <div class="dest-mini-country">${d.country}</div>
+      <div class="dest-mini-tags">${d.best.map(s=>`<span class="dest-mini-tag">${s.charAt(0).toUpperCase()+s.slice(1)}</span>`).join('')}</div>
+    </div>`).join('');
+}
+
+function updateBadges(){
+  const bd=document.getElementById('badge-dest');
+  const bt=document.getElementById('badge-trips');
+  const bw=document.getElementById('badge-wish');
+  if(wishlist.size>0){bd.style.display='flex';bd.textContent=wishlist.size;}else bd.style.display='none';
+  if(trips.length>0){bt.style.display='flex';bt.textContent=trips.length;}else bt.style.display='none';
+  if(wishlist.size>0){bw.style.display='flex';bw.textContent=wishlist.size;}else bw.style.display='none';
+}
+
+function toast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toast-msg').textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+// INIT
+renderHome();
+renderDestGrid();
+renderTrips();
+renderPack();
+updateBadges();
+</script>
+</body>
+</html>
