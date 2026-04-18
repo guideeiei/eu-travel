@@ -289,4 +289,79 @@ renderDestGrid();
 renderTrips();
 renderPack();
 updateBadges();
+function renderCountryGrid() {
 
+  const grid =
+    document.getElementById('dest-grid');
+
+  grid.innerHTML =
+    COUNTRIES.map(c => `
+
+      <div class="dest-card-full"
+           onclick="openCountry('${c.id}')">
+
+        <div style="font-size:28px;">
+          ${c.flag}
+        </div>
+
+        <div>
+          ${c.name}
+        </div>
+
+        <div>
+          ${c.places.length} places
+        </div>
+
+      </div>
+
+    `).join('');
+
+}
+function openCountry(id) {
+
+  const country =
+    COUNTRIES.find(c => c.id === id);
+
+  const list =
+    document.getElementById('place-list');
+
+  list.innerHTML =
+    country.places.map(p => `
+
+      <div class="place-card">
+
+        <img
+          src="${p.image}"
+          class="place-img"
+        >
+
+        <div class="place-name">
+          ${p.name}
+        </div>
+
+        <div class="place-price">
+          €${p.price}
+        </div>
+
+        <div>
+          ${p.desc}
+        </div>
+
+      </div>
+
+    `).join('');
+
+  document
+    .getElementById('country-modal')
+    .classList.add('open');
+
+}
+function closeCountry() {
+
+  document
+    .getElementById('country-modal')
+    .classList.remove('open');
+
+}
+if(name === 'dest')
+  renderCountryGrid();
