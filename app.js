@@ -1,4 +1,3 @@
-<script>
 const DESTS=[
   {id:'paris',flag:'🇫🇷',name:'Paris',country:'France',desc:'Cafés, art, and the Eiffel Tower at golden hour.',best:['spring','autumn'],tags:['Romantic','Art','Food'],color:'#ff6ba0'},
   {id:'rome',flag:'🇮🇹',name:'Rome',country:'Italy',desc:'Ancient ruins, gelato, and incredible pasta.',best:['spring','autumn'],tags:['History','Food','Architecture'],color:'#f5a923'},
@@ -237,4 +236,4 @@ renderDestGrid();
 renderTrips();
 renderPack();
 updateBadges();
-</script>
+
