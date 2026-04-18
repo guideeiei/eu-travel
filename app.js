@@ -231,6 +231,8 @@ function toast(msg){
 }
 
 // INIT
+init();
+window.showTab = showTab;
 renderHome();
 renderDestGrid();
 renderTrips();
