@@ -22,7 +22,6 @@
   <button class="topbar-btn" onclick="openModal()">+</button>
 </div>
 
-<!-- SCROLL -->
 <div class="scroll-wrap">
 
   <!-- HOME -->
@@ -53,9 +52,7 @@
 
   <!-- DEST -->
   <div class="panel" id="panel-dest">
-    <div class="search-bar">
-      <input id="dest-search" oninput="renderDestGrid()" placeholder="Search..."/>
-    </div>
+    <input id="dest-search" oninput="renderDestGrid()" placeholder="Search..."/>
 
     <div class="chip-row">
       <div class="chip active" onclick="setDestFilter(this,'all')">All</div>
@@ -67,7 +64,7 @@
 
     <div class="dest-full-grid" id="dest-grid"></div>
 
-    <div style="display:flex;gap:8px;margin-top:10px;">
+    <div>
       <button onclick="clearSel()">Clear</button>
       <button onclick="saveWishlist()">Save wishlist</button>
     </div>
@@ -106,24 +103,19 @@
     <input id="f-flag" placeholder="Flag"/>
     <input id="f-from" type="date"/>
     <input id="f-to" type="date"/>
-    <input id="f-budget" type="number" placeholder="Budget"/>
+    <input id="f-budget" type="number"/>
     <select id="f-season">
       <option value="spring">Spring</option>
       <option value="summer">Summer</option>
       <option value="autumn">Autumn</option>
       <option value="winter">Winter</option>
     </select>
-
     <input id="f-notes" placeholder="Notes"/>
 
-    <div style="display:flex;gap:8px;">
-      <button onclick="closeModal()">Cancel</button>
-      <button onclick="saveTrip()">Save</button>
-    </div>
+    <button onclick="saveTrip()">Save</button>
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"><span id="toast-msg"></span></div>
 
 <script src="script.js"></script>
