@@ -1,74 +1,50 @@
-let trips = [];
+const DESTS = [...]
+const PLACE_GUIDES = {...}
+const PACK_ITEMS = {...}
 
-function showTab(name) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.getElementById(name).classList.add('active');
-}
+let wishlist = ...
+let trips = ...
+let packState = ...
+let destFilter = ...
+let budgetChart = ...
 
-function renderDestinations() {
-  const grid = document.getElementById('dest-grid');
-  grid.innerHTML = DESTS.map(d => `
-    <div class="card" onclick="openPlaceModal('${d.id}')">
-      <div style="font-size:28px">${d.flag}</div>
-      <div>${d.name}</div>
-      <div style="font-size:12px;color:#8b8a9a">${d.country}</div>
-    </div>
-  `).join('');
-}
+// tabs
+function showTab(){...}
 
-function openPlaceModal(id) {
-  const place = DESTS.find(d => d.id === id);
-  const places = PLACE_GUIDES[id] || [];
+// explore
+function renderDestGrid(){...}
+function toggleWish(){...}
+function setDestFilter(){...}
+function clearSel(){...}
+function saveWishlist(){...}
 
-  document.getElementById('place-title').textContent = `${place.flag} ${place.name}`;
-  document.getElementById('place-list').innerHTML = places.map(p => `
-    <div class="card" style="margin-bottom:8px;cursor:default">
-      ${p.icon} ${p.name}<br>
-      <small>${p.note}</small>
-    </div>
-  `).join('');
+// places popup
+function openPlacesModal(){...}
+function closePlacesModal(){...}
 
-  document.getElementById('place-modal').classList.remove('hidden');
-}
+// wishlist
+function renderWishlist(){...}
 
-function closePlaceModal() {
-  document.getElementById('place-modal').classList.add('hidden');
-}
+// trips
+function openModal(){...}
+function closeModal(){...}
+function saveTrip(){...}
+function deleteTrip(){...}
+function renderTrips(){...}
 
-function openTripModal() {
-  document.getElementById('trip-modal').classList.remove('hidden');
-}
+// pack
+function renderPack(){...}
+function togglePack(){...}
+function resetPack(){...}
 
-function closeTripModal() {
-  document.getElementById('trip-modal').classList.add('hidden');
-}
+// home
+function renderHome(){...}
+function updateBadges(){...}
+function toast(){...}
 
-function saveTrip() {
-  const dest = document.getElementById('trip-dest').value;
-  const date = document.getElementById('trip-date').value;
-  const budget = document.getElementById('trip-budget').value;
-
-  trips.push({ dest, date, budget });
-  renderTrips();
-  closeTripModal();
-}
-
-function renderTrips() {
-  const list = document.getElementById('trips-list');
-  list.innerHTML = trips.map(t => `
-    <div class="card">
-      ✈️ ${t.dest}<br>
-      📅 ${t.date}<br>
-      💷 ${t.budget}
-    </div>
-  `).join('');
-}
-
-function renderPacking() {
-  document.getElementById('pack-list').innerHTML = PACK_ITEMS.map(i => `
-    <div class="card">🎒 ${i}</div>
-  `).join('');
-}
-
-renderDestinations();
-renderPacking();
+// init
+renderHome();
+renderDestGrid();
+renderTrips();
+renderPack();
+updateBadges();
