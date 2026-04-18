@@ -1,3 +1,44 @@
+```css
+:root{
+  --bg:#0f0f14;
+  --bg2:#17171f;
+  --bg3:#20202a;
+  --bg4:#2a2a35;
+
+  --text:#ffffff;
+  --text2:#c8c8d0;
+  --text3:#8c8c98;
+
+  --border:#2d2d38;
+  --border2:#3a3a48;
+
+  --accent:#7c6fff;
+  --accent2:#a89fff;
+  --accent-bg:rgba(124,111,255,0.15);
+
+  --green:#42d392;
+  --green-bg:rgba(66,211,146,0.15);
+
+  --amber:#ffb84d;
+  --amber-bg:rgba(255,184,77,0.15);
+
+  --red:#ff6b6b;
+  --red-bg:rgba(255,107,107,0.15);
+
+  --radius:16px;
+  --radius-sm:10px;
+
+  --top-h:64px;
+  --tab-h:70px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+```
+
 body{height:100%;overflow:hidden;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
 
