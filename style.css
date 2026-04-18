@@ -218,4 +218,41 @@ canvas{display:block;}
   .wish-grid{grid-template-columns:repeat(3,1fr);}
   .stats-grid{grid-template-columns:repeat(4,1fr);}
 }
+/* ===== LOCK TOP & BOTTOM / SCROLL ONLY MIDDLE ===== */
+
+/* ไม่ให้ทั้งหน้าเลื่อน */
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* top bar ล็อกด้านบน */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+/* tab bar ล็อกด้านล่าง */
+.tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+/* ให้เลื่อนเฉพาะตรงกลาง */
+.scroll-wrap {
+  position: fixed;
+  top: 64px;      /* ความสูง topbar */
+  bottom: 72px;   /* ความสูง tabbar */
+  left: 0;
+  right: 0;
+
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
 
