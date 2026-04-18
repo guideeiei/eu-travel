@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>EuroTrip — Bubuu 🧸 & Bibii 🐶 </title>
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
@@ -12,12 +11,21 @@
 
 <!-- TOP BAR -->
 <div class="topbar">
-  <div>
-    <div class="topbar-title">✈ EuroTrip</div>
-    <div class="topbar-sub">Bubuu🧸 & Bibii🐶 · UK Base</div>
+  <div class="topbar-left">
+    <button class="back-btn" id="back-btn" onclick="goBack()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 3L5 8l5 5"/>
+      </svg>
+    </button>
+    <div>
+      <div class="topbar-title" id="topbar-title">✈ EuroTrip</div>
+      <div class="topbar-sub" id="topbar-sub">Bubuu🧸 & Bibii🐶 · UK Base</div>
+    </div>
   </div>
   <button class="topbar-btn" onclick="openModal()">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M8 3v10M3 8h10"/>
+    </svg>
   </button>
 </div>
 
@@ -33,15 +41,11 @@
       <div class="stat-card"><div class="stat-label">Countries</div><div class="stat-value" id="s-countries">0</div><div class="stat-sub">to visit</div></div>
       <div class="stat-card"><div class="stat-label">Budget</div><div class="stat-value" id="s-budget">£0</div><div class="stat-sub">total est.</div></div>
     </div>
-
-    <!-- Budget chart -->
     <div class="card" style="margin-bottom:10px;">
       <div class="section-header"><div class="section-title">Budget breakdown</div></div>
       <div class="chart-wrap"><canvas id="budgetChart" role="img" aria-label="Budget breakdown by trip"></canvas></div>
       <div id="chart-legend" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;"></div>
     </div>
-
-    <!-- Wishlist preview -->
     <div class="card" style="margin-bottom:10px;">
       <div class="section-header">
         <div><div class="section-title">Wishlist</div></div>
@@ -49,31 +53,50 @@
       </div>
       <div id="dash-wish-preview"><div style="font-size:12px;color:var(--text2);">No destinations saved yet.</div></div>
     </div>
-
-    <!-- Recommended -->
     <div class="section-header" style="margin-bottom:10px;"><div class="section-title">Recommended from UK</div></div>
     <div class="dest-scroll" id="dash-recs"></div>
     <div style="height:8px;"></div>
   </div>
 
-  <!-- DESTINATIONS -->
+  <!-- EXPLORE — 3-level drill-down -->
   <div class="panel" id="panel-dest">
-    <div class="search-bar">
-      <svg class="search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="4"/><path d="M10 10l2.5 2.5"/></svg>
-      <input type="text" placeholder="Search cities, countries..." id="dest-search" oninput="renderDestGrid()"/>
+
+    <!-- LEVEL 1: Country list -->
+    <div id="level-1">
+      <div class="search-bar">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="6" cy="6" r="4"/><path d="M10 10l2.5 2.5"/>
+        </svg>
+        <input type="text" placeholder="Search country..." id="country-search" oninput="renderCountryList()"/>
+      </div>
+      <div id="country-list"></div>
     </div>
-    <div class="chip-row">
-      <div class="chip active" data-f="all" onclick="setDestFilter(this,'all')">All</div>
-      <div class="chip" data-f="spring" onclick="setDestFilter(this,'spring')">🌸 Spring</div>
-      <div class="chip" data-f="summer" onclick="setDestFilter(this,'summer')">☀️ Summer</div>
-      <div class="chip" data-f="autumn" onclick="setDestFilter(this,'autumn')">🍂 Autumn</div>
-      <div class="chip" data-f="winter" onclick="setDestFilter(this,'winter')">❄️ Winter</div>
+
+    <!-- LEVEL 2: City chips + segment + content -->
+    <div id="level-2" style="display:none;">
+      <!-- city filter chips -->
+      <div class="city-chip-row" id="city-chips"></div>
+
+      <!-- segment: Places / Restaurants -->
+      <div class="segment-control">
+        <div class="seg-btn active" id="seg-places" onclick="setSeg('places')">📍 Places</div>
+        <div class="seg-btn" id="seg-restaurants" onclick="setSeg('restaurants')">🍽 Restaurants</div>
+      </div>
+
+      <!-- Places grid -->
+      <div id="places-content">
+        <div class="place-grid" id="places-grid"></div>
+      </div>
+
+      <!-- Restaurants list -->
+      <div id="restaurants-content" style="display:none;">
+        <div id="resto-list"></div>
+        <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:4px;" onclick="openRestoModal()">
+          + Add restaurant
+        </button>
+      </div>
     </div>
-    <div class="dest-full-grid" id="dest-grid"></div>
-    <div style="display:flex;gap:8px;margin-top:14px;">
-      <button class="btn btn-ghost btn-sm" onclick="clearSel()">Clear</button>
-      <button class="btn btn-primary btn-sm" style="flex:1;justify-content:center;" onclick="saveWishlist()">Save to wishlist</button>
-    </div>
+
   </div>
 
   <!-- TRIPS -->
@@ -134,7 +157,7 @@
   </div>
 </div>
 
-<!-- MODAL -->
+<!-- ADD TRIP MODAL -->
 <div class="modal-bg" id="modal-bg">
   <div class="modal">
     <div class="modal-handle"></div>
@@ -149,22 +172,12 @@
       <input class="form-input" type="text" id="f-flag" placeholder="🇫🇷" maxlength="4"/>
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">From</label>
-        <input class="form-input" type="date" id="f-from"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">To</label>
-        <input class="form-input" type="date" id="f-to"/>
-      </div>
+      <div class="form-group"><label class="form-label">From</label><input class="form-input" type="date" id="f-from"/></div>
+      <div class="form-group"><label class="form-label">To</label><input class="form-input" type="date" id="f-to"/></div>
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Budget (£)</label>
-        <input class="form-input" type="number" id="f-budget" placeholder="500" min="0"/>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Season</label>
+      <div class="form-group"><label class="form-label">Budget (£)</label><input class="form-input" type="number" id="f-budget" placeholder="500" min="0"/></div>
+      <div class="form-group"><label class="form-label">Season</label>
         <select class="form-select" id="f-season">
           <option value="spring">🌸 Spring</option>
           <option value="summer" selected>☀️ Summer</option>
@@ -184,44 +197,49 @@
   </div>
 </div>
 
+<!-- ADD RESTAURANT MODAL -->
+<div class="modal-bg" id="resto-modal-bg">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Add a restaurant</div>
+    <div class="modal-sub" id="resto-modal-sub">Rome, Italy</div>
+    <div class="form-group">
+      <label class="form-label">Restaurant name</label>
+      <input class="form-input" type="text" id="r-name" placeholder="e.g. Trattoria da Enzo"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Emoji icon</label>
+      <input class="form-input" type="text" id="r-emoji" placeholder="🍝" maxlength="4"/>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Cuisine type</label><input class="form-input" type="text" id="r-cuisine" placeholder="e.g. Italian"/></div>
+      <div class="form-group"><label class="form-label">Price range</label>
+        <select class="form-select" id="r-price">
+          <option value="£">£ Budget</option>
+          <option value="££" selected>££ Mid</option>
+          <option value="£££">£££ Fine</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Why go? (short note)</label>
+      <input class="form-input" type="text" id="r-note" placeholder="e.g. Best carbonara in Rome"/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tags (comma separated)</label>
+      <input class="form-input" type="text" id="r-tags" placeholder="e.g. Pasta, Local, Must-try"/>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeRestoModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveResto()">Add restaurant</button>
+    </div>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast"><div class="toast-dot"></div><span id="toast-msg">Saved!</span></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="app.js"></script>
- <div id="country-modal">
-
-  <div class="modal-content">
-
-    <div style="
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:12px;
-    ">
-
-      <div style="
-        font-size:16px;
-        font-weight:600;
-      ">
-        Places
-      </div>
-
-      <button
-        class="btn btn-secondary"
-        onclick="closeCountry()"
-      >
-        Close
-      </button>
-
-    </div>
-
-    <div id="place-list"></div>
-
-  </div>
-
-</div>
-
-</div>
 </body>
 </html>
