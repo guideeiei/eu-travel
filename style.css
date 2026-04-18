@@ -218,11 +218,12 @@ canvas{display:block;}
   .wish-grid{grid-template-columns:repeat(3,1fr);}
   .stats-grid{grid-template-columns:repeat(4,1fr);}
 }
-/* ===== LOCK TOP & BOTTOM / SCROLL ONLY MIDDLE ===== */
+/* ===== UNIVERSAL LOCK TOP & BOTTOM / SCROLL ONLY CONTENT ===== */
 
-/* ไม่ให้ทั้งหน้าเลื่อน */
+/* ทั้งหน้าไม่เลื่อน */
 html, body {
   height: 100%;
+  margin: 0;
   overflow: hidden;
 }
 
@@ -244,7 +245,7 @@ html, body {
   z-index: 1000;
 }
 
-/* ให้เลื่อนเฉพาะตรงกลาง */
+/* เลื่อนเฉพาะ content ตรงกลาง */
 .scroll-wrap {
   position: fixed;
   top: 64px;      /* ความสูง topbar */
