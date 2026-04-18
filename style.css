@@ -260,23 +260,25 @@ html, body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
-.modal {
+#country-modal {
 
   position: fixed;
   inset: 0;
 
-  background: rgba(0,0,0,0.6);
+  background: rgba(15, 14, 25, 0.7);
+
+  backdrop-filter: blur(6px);
 
   display: none;
 
   justify-content: center;
   align-items: center;
 
-  z-index: 999;
+  z-index: 9999;
 
 }
 
-.modal.open {
+#country-modal.open {
 
   display: flex;
 
@@ -284,24 +286,35 @@ html, body {
 
 .modal-content {
 
-  background: white;
-
-  width: 90%;
+  width: 92%;
   max-width: 420px;
 
   max-height: 80vh;
 
   overflow-y: auto;
 
-  border-radius: 14px;
+  background: var(--bg2);
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
 
   padding: 16px;
 
-}
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 
+}
 .place-card {
 
-  margin-bottom: 14px;
+  background: var(--bg3);
+
+  border: 1px solid var(--border);
+
+  border-radius: 16px;
+
+  padding: 12px;
+
+  margin-bottom: 12px;
 
 }
 
@@ -312,22 +325,36 @@ html, body {
 
   object-fit: cover;
 
-  border-radius: 10px;
+  border-radius: 12px;
 
 }
 
 .place-name {
 
+  font-size: 15px;
+
   font-weight: 600;
 
-  margin-top: 6px;
+  margin-top: 8px;
 
 }
 
 .place-price {
 
-  color: #7c6fff;
+  font-size: 13px;
 
-  font-weight: 600;
+  color: var(--accent2);
+
+  margin-top: 2px;
+
+}
+
+.place-desc {
+
+  font-size: 12px;
+
+  color: var(--text2);
+
+  margin-top: 4px;
 
 }
