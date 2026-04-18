@@ -12,17 +12,6 @@
   --teal:#00d4aa;--teal-bg:rgba(0,212,170,0.1);
   --tab-h:64px;--top-h:56px;--radius:14px;--radius-sm:10px;
 }
-html,body{
-  height:100%;
-  min-height:100vh;
-}
-.scroll-wrap {
-  min-height: 0;
-}
-
-.panel {
-  min-height: 100%;
-}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
 
 /* TOPBAR */
@@ -221,10 +210,77 @@ canvas{display:block;}
 .hero-countdown-label{font-size:11px;color:var(--text3);}
 
 @media(min-width:600px){
-   .tab-icon {
+/* ===== UNIVERSAL LAYOUT FIX (Mobile / Tablet / Desktop) ===== */
+
+/* reset scroll ซ้อน */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  width: 100%;
+  max-width: 420px;      /* Mobile default */
+  margin: 0 auto;
+  overflow: hidden;      /* กัน scroll ซ้อน */
+  background: #000;      /* optional: ทำให้ดูเหมือน app */
+  display: flex;
+  flex-direction: column;
+}
+
+/* พื้นที่ scroll หลัก */
+.scroll-wrap {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;         /* สำคัญสำหรับ iPad */
+}
+
+/* panel ไม่สร้าง scroll ซ้อน */
+.panel {
+  overflow: visible;
+}
+
+/* ปุ่มกดให้แตะง่าย */
+.tab-item,
+.topbar-btn,
+.btn {
+  min-height: 44px;      /* Apple guideline */
+}
+
+/* ===== TABLET (iPad) ===== */
+@media (min-width: 768px) {
+
+  body {
+    max-width: 600px;    /* fix layout สำหรับ tablet */
+  }
+
+  .tab-icon {
     width: 30px;
     height: 30px;
   }
+
+  .tab-label {
+    font-size: 12px;
+  }
+
+  .panel {
+    padding: 20px;
+  }
+
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 1024px) {
+
+  body {
+    max-width: 720px;    /* fix layout สำหรับคอม */
+  }
+
+  .panel {
+    padding: 24px;
+  }
+
+}
 
   .dest-full-grid{grid-template-columns:repeat(3,1fr);}
   .wish-grid{grid-template-columns:repeat(3,1fr);}
