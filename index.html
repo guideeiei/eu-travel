@@ -189,29 +189,38 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="app.js"></script>
-      <div id="country-modal" class="modal">
+ <div id="country-modal">
 
   <div class="modal-content">
 
-    <div id="place-list"></div>
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:12px;
+    ">
 
-    <button onclick="closeCountry()">
-      Close
-    </button>
+      <div style="
+        font-size:16px;
+        font-weight:600;
+      ">
+        Places
+      </div>
+
+      <button
+        class="btn btn-secondary"
+        onclick="closeCountry()"
+      >
+        Close
+      </button>
+
+    </div>
+
+    <div id="place-list"></div>
 
   </div>
 
-</div><div id="country-modal" class="modal">
-
-  <div class="modal-content">
-
-    <div id="place-list"></div>
-
-    <button onclick="closeCountry()">
-      Close
-    </button>
-
-  </div>
+</div>
 
 </div>
 </body>
