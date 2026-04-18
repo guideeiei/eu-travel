@@ -10,15 +10,38 @@ const COUNTRIES = [
       {
         name: 'Eiffel Tower',
         image: 'images/eiffel.jpg',
-        price: 25,
-        desc: 'Iconic tower in Paris'
+        place:  'Paris'
       },
 
       {
         name: 'Louvre Museum',
         image: 'images/louvre.jpg',
-        price: 17,
-        desc: 'World famous museum'
+        place:  'Paris'
+      },
+      {
+        name: 'Lafayette',
+        image: 'images/Lafayette.jpg',
+        place:  'Paris'
+      },
+      {
+        name: 'Bourse de Commerce',
+        image: 'images/Bourse de Commerce.jpg',
+        place:  'Paris'
+      },
+       {
+        name: 'Cafe de Flore',
+        image: 'images/Cafe de Flore.jpg',
+        place:  'Paris'
+      },
+      {
+        name: 'Disneyland Paris',
+        image: 'images/Disneyland Paris.jpg',
+        place:  'Paris'
+      },
+        {
+        name: 'Montmartre',
+        image: 'images/Montmartre.jpg',
+        place:  'Paris'
       }
 
     ]
@@ -32,18 +55,53 @@ const COUNTRIES = [
     places: [
 
       {
-        name: 'Colosseum',
-        image: 'images/colosseum.jpg',
-        price: 18,
-        desc: 'Ancient Roman arena'
+        name: 'Duomo di Milano',
+        image: 'images/Duomo di Milano.jpg',
+        place:  'Milan'
       },
 
       {
-        name: 'Venice Canal',
-        image: 'images/venice.jpg',
-        price: 30,
-        desc: 'Boat ride in Venice'
-      }
+        name: 'Galleria Vittorio Emanuele ll',
+        image: 'images/Galleria Vittorio Emanuele ll.jpg',
+        place:  'Milan'
+      },
+         {
+        name: 'Colosseum',
+        image: 'images/colosseum.jpg',
+        place:  'Rome'
+      },
+        {
+        name: 'Trastevere',
+        image: 'images/Trastevere.jpg',
+        place:  'Rome'
+      },
+        {
+        name: 'Palazzo Colonna',
+        image: 'images/Palazzo Colonna.jpg',
+        place:  'Rome'
+      },
+        {
+        name: 'Sistine Chapel',
+        image: 'images/Sistine Chapel.jpg',
+        place:  'Rome'
+      },
+       {
+        name: 'Vatican Museums',
+        image: 'images/Vatican Museums.jpg',
+        place:  'Vatican'
+      },
+         {
+        name: 'Pantheon',
+        image: 'images/Pantheon.jpg',
+        place:  'Vatican'
+      },
+          {
+        name: 'Lake Como',
+        image: 'images/Lake Como.jpg',
+        place:  'Lombardy'
+      },
+
+
 
     ]
   }
