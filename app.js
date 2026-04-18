@@ -94,7 +94,7 @@ function showTab(name){
     icon.querySelectorAll('path,circle,rect,polyline').forEach(p=>p.setAttribute('stroke',strokeColor));
   });
   if(name==='home')renderHome();
-  if(name==='dest')renderDestGrid();
+  if(name==='dest')renderCountryGrid();
   if(name==='trips')renderTrips();
   if(name==='wish')renderWishlist();
   if(name==='pack')renderPack();
@@ -363,5 +363,4 @@ function closeCountry() {
     .classList.remove('open');
 
 }
-if(name === 'dest')
-  renderCountryGrid();
+
