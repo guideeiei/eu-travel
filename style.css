@@ -1,18 +1,4 @@
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-:root{
-  --bg:#0c0c12;--bg2:#13131c;--bg3:#1a1a26;--bg4:#20202e;
-  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
-  --text:#f0eff6;--text2:#8b8a9a;--text3:#4e4d5e;
-  --accent:#7c6fff;--accent2:#a99fff;--accent-bg:rgba(124,111,255,0.13);
-  --green:#22d47c;--green-bg:rgba(34,212,124,0.1);
-  --amber:#f5a923;--amber-bg:rgba(245,169,35,0.1);
-  --red:#ff5c5c;--red-bg:rgba(255,92,92,0.1);
-  --blue:#3b9fff;--blue-bg:rgba(59,159,255,0.1);
-  --pink:#ff6ba0;--pink-bg:rgba(255,107,160,0.1);
-  --teal:#00d4aa;--teal-bg:rgba(0,212,170,0.1);
-  --tab-h:64px;--top-h:56px;--radius:14px;--radius-sm:10px;
-}
-html,body{height:100%;overflow:hidden;}
+body{height:100%;overflow:hidden;}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;}
 
 /* TOPBAR */
