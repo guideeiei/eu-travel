@@ -1,3 +1,54 @@
+const COUNTRIES = [
+
+  {
+    id: 'france',
+    name: 'France',
+    flag: '🇫🇷',
+
+    places: [
+
+      {
+        name: 'Eiffel Tower',
+        image: 'images/eiffel.jpg',
+        price: 25,
+        desc: 'Iconic tower in Paris'
+      },
+
+      {
+        name: 'Louvre Museum',
+        image: 'images/louvre.jpg',
+        price: 17,
+        desc: 'World famous museum'
+      }
+
+    ]
+  },
+
+  {
+    id: 'italy',
+    name: 'Italy',
+    flag: '🇮🇹',
+
+    places: [
+
+      {
+        name: 'Colosseum',
+        image: 'images/colosseum.jpg',
+        price: 18,
+        desc: 'Ancient Roman arena'
+      },
+
+      {
+        name: 'Venice Canal',
+        image: 'images/venice.jpg',
+        price: 30,
+        desc: 'Boat ride in Venice'
+      }
+
+    ]
+  }
+
+];
 const DESTS=[
   {id:'paris',flag:'🇫🇷',name:'Paris',country:'France',desc:'Cafés, art, and the Eiffel Tower at golden hour.',best:['spring','autumn'],tags:['Romantic','Art','Food'],color:'#ff6ba0'},
   {id:'rome',flag:'🇮🇹',name:'Rome',country:'Italy',desc:'Ancient ruins, gelato, and incredible pasta.',best:['spring','autumn'],tags:['History','Food','Architecture'],color:'#f5a923'},
