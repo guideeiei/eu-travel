@@ -8,8 +8,54 @@
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">✈ EuroTrip</div>
+      <div class="topbar-sub">Guide & Girlfriend · UK Base</div>
+    </div>
+    <button class="topbar-btn" onclick="openModal()">+</button>
+  </div>
+
+  <!-- SCROLL AREA -->
+  <div class="scroll-wrap">
+    <div class="panel active" id="panel-home">
+      <div id="hero-wrap"></div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-label">Trips</div><div class="stat-value" id="s-trips">0</div></div>
+        <div class="stat-card"><div class="stat-label">Wishlist</div><div class="stat-value" id="s-wish">0</div></div>
+      </div>
+      <div class="chart-wrap"><canvas id="budgetChart"></canvas></div>
+    </div>
+
+    <div class="panel" id="panel-dest">
+      <div class="dest-full-grid" id="dest-grid"></div>
+    </div>
+
+    <div class="panel" id="panel-trips">
+      <div id="trips-list"></div>
+    </div>
+
+    <div class="panel" id="panel-wish">
+      <div id="wish-list"></div>
+    </div>
+
+    <div class="panel" id="panel-pack">
+      <div id="pack-body"></div>
+    </div>
+  </div>
+
+  <div class="tabbar">
+    <div class="tab-item active" id="tab-home" onclick="showTab('home')">Home</div>
+    <div class="tab-item" id="tab-dest" onclick="showTab('dest')">Explore</div>
+    <div class="tab-item" id="tab-trips" onclick="showTab('trips')">Trips</div>
+    <div class="tab-item" id="tab-wish" onclick="showTab('wish')">Wishlist</div>
+    <div class="tab-item" id="tab-pack" onclick="showTab('pack')">Pack</div>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script src="data.js"></script>
-<script src="script.js"></script>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
