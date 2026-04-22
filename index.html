@@ -74,21 +74,14 @@
 
     <!-- LEVEL 2: City chips + segment + content -->
     <div id="level-2" style="display:none;">
-      <!-- city filter chips -->
       <div class="city-chip-row" id="city-chips"></div>
-
-      <!-- segment: Places / Restaurants -->
       <div class="segment-control">
         <div class="seg-btn active" id="seg-places" onclick="setSeg('places')">📍 Places</div>
         <div class="seg-btn" id="seg-restaurants" onclick="setSeg('restaurants')">🍽 Restaurants</div>
       </div>
-
-      <!-- Places grid -->
       <div id="places-content">
         <div class="place-grid" id="places-grid"></div>
       </div>
-
-      <!-- Restaurants list -->
       <div id="restaurants-content" style="display:none;">
         <div id="resto-list"></div>
         <button class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:4px;" onclick="openRestoModal()">
@@ -165,30 +158,30 @@
     <div class="modal-sub">Add your next European adventure</div>
     <div class="form-group">
       <label class="form-label">Destination</label>
-      <input class="form-input" type="text" id="f-dest" placeholder="e.g. Paris, France"/>
+      <input class="form-input" type="text" id="f-dest" placeholder="e.g. Rome, Italy"/>
     </div>
     <div class="form-group">
       <label class="form-label">Flag emoji</label>
-      <input class="form-input" type="text" id="f-flag" placeholder="🇫🇷" maxlength="4"/>
+      <input class="form-input" type="text" id="f-flag" placeholder="🇮🇹" maxlength="4"/>
     </div>
     <div class="form-row">
-      <div class="form-group"><label class="form-label">From</label><input class="form-input" type="date" id="f-from"/></div>
-      <div class="form-group"><label class="form-label">To</label><input class="form-input" type="date" id="f-to"/></div>
+      <div class="form-group"><label class="form-label">From</label><input class="form-input" type="date" id="f-from" value="2025-09-04"/></div>
+      <div class="form-group"><label class="form-label">To</label><input class="form-input" type="date" id="f-to" value="2025-09-11"/></div>
     </div>
     <div class="form-row">
-      <div class="form-group"><label class="form-label">Budget (£)</label><input class="form-input" type="number" id="f-budget" placeholder="500" min="0"/></div>
+      <div class="form-group"><label class="form-label">Budget (£)</label><input class="form-input" type="number" id="f-budget" placeholder="800" min="0"/></div>
       <div class="form-group"><label class="form-label">Season</label>
         <select class="form-select" id="f-season">
           <option value="spring">🌸 Spring</option>
-          <option value="summer" selected>☀️ Summer</option>
-          <option value="autumn">🍂 Autumn</option>
+          <option value="summer">☀️ Summer</option>
+          <option value="autumn" selected>🍂 Autumn</option>
           <option value="winter">❄️ Winter</option>
         </select>
       </div>
     </div>
     <div class="form-group">
       <label class="form-label">Notes</label>
-      <input class="form-input" type="text" id="f-notes" placeholder="e.g. Eurostar, book 2 months ahead"/>
+      <input class="form-input" type="text" id="f-notes" placeholder="e.g. Fly London → Rome, train to Paris"/>
     </div>
     <div class="modal-actions">
       <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
@@ -203,17 +196,27 @@
     <div class="modal-handle"></div>
     <div class="modal-title">Add a restaurant</div>
     <div class="modal-sub" id="resto-modal-sub">Rome, Italy</div>
+
+    <!-- Photo upload -->
+    <div class="form-group">
+      <label class="form-label">Photo (from your phone)</label>
+      <label class="photo-upload-label" for="r-photo">
+        <img id="r-photo-preview" style="display:none;width:100%;height:140px;object-fit:cover;border-radius:10px;" alt="preview"/>
+        <div id="r-photo-placeholder" class="photo-placeholder">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <span>Tap to upload photo</span>
+        </div>
+        <input type="file" id="r-photo" accept="image/*" capture="environment" style="display:none;"/>
+      </label>
+    </div>
+
     <div class="form-group">
       <label class="form-label">Restaurant name</label>
       <input class="form-input" type="text" id="r-name" placeholder="e.g. Trattoria da Enzo"/>
     </div>
-    <div class="form-group">
-      <label class="form-label">Emoji icon</label>
-      <input class="form-input" type="text" id="r-emoji" placeholder="🍝" maxlength="4"/>
-    </div>
     <div class="form-row">
       <div class="form-group"><label class="form-label">Cuisine type</label><input class="form-input" type="text" id="r-cuisine" placeholder="e.g. Italian"/></div>
-      <div class="form-group"><label class="form-label">Price range</label>
+      <div class="form-group"><label class="form-label">Price</label>
         <select class="form-select" id="r-price">
           <option value="£">£ Budget</option>
           <option value="££" selected>££ Mid</option>
@@ -222,7 +225,11 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="form-label">Why go? (short note)</label>
+      <label class="form-label">Google Maps link</label>
+      <input class="form-input" type="url" id="r-maps" placeholder="https://maps.google.com/?q=..."/>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Why go?</label>
       <input class="form-input" type="text" id="r-note" placeholder="e.g. Best carbonara in Rome"/>
     </div>
     <div class="form-group">
